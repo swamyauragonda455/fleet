@@ -1,0 +1,29 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { AuthComponent } from './auth.component';
+import { FormsModule } from '@angular/forms';
+import { AdminComponent } from './admin.component';
+
+let routing = RouterModule.forChild([
+  {
+    path: 'auth',
+    component: AuthComponent,
+  },
+  {
+    path: 'main',
+    component: AdminComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'auth',
+  },
+]);
+
+@NgModule({
+  imports: [CommonModule, routing, FormsModule],
+  exports: [],
+  declarations: [AuthComponent, AdminComponent],
+  providers: [],
+})
+export class AdminModule {}

@@ -1,0 +1,118 @@
+<!-- Navbar -->
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 rounded">
+    <div class="container-fluid">
+      <a class="navbar-brand">Welcome</a>
+
+      <!-- Toggler for mobile -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Left nav links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <button class="nav-link active" routerLink="/vehicle">Home</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/admin">Fleet Manager</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/signin">sign In</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/signup">sign up</button>
+          </li>
+        </ul>
+
+        <!-- Search and Filter -->
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search vehicles..."
+            aria-label="Search"
+          />
+
+          <button class="btn btn-outline-light" type="submit">Go</button>
+          <select
+            class="form-select"
+            [(ngModel)]="selectedCategory"
+            name="category"
+            (change)="changeCategory(selectedCategory)"
+          >
+            <option value="">Select category</option>
+            <option value="ev">EV</option>
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+            <option value="cng">CNG</option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let item of vehicles">
+      <div class="card h-100 shadow-sm">
+        <!-- Optional Image -->
+        <!-- <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Vehicle Image" /> -->
+
+        <div class="card-body">
+          <h5 class="card-title">
+            vehicle #{{ item.vehicleNo }}
+            <span class="badge bg-dark float-end">
+              ${{ item.pricePerKm }}
+            </span>
+          </h5>
+          <p class="card-text">model:{{ item.model }}</p>
+          <p class="card-text">type:{{ item.category }}</p>
+          <p class="card-text">{{ item.seater }} seater</p>
+          <p class="bg-success text-white p-2 m-5">status:{{ item.status }}</p>
+        </div>
+
+        <div class="card-footer bg-transparent border-top-0">
+          <button
+            class="btn btn-primary btn-sm me-2"
+            (click)="addToBasket(item)"
+          >
+            book
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-9 p-2">
+    <div class="form-inline float-left mr-1">
+      <select
+        class="form-control"
+        [value]="vehiclesPerPage"
+        (change)="changePageSize($event.target)"
+      >
+        <!-- $event is referred as the last fired event  -->
+        <option value="3">3 per page</option>
+        <option value="4">4 per page</option>
+        <option value="6">6 per page</option>
+        <option value="8">8 per page</option>
+      </select>
+    </div>
+    <div class="btn-group float-right">
+      <button
+        *ngFor="let page of PageNumber"
+        class="btn btn-outline-primary"
+        (click)="changePage(page)"
+        [class.active]="page == selectedPage"
+      >
+        {{ page }}
+      </button>
+    </div>
+  </div>
+</div>
