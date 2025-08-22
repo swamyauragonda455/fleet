@@ -1,0 +1,107 @@
+<div>
+  <h2 class="text-center">Booking details</h2>
+</div>
+<div
+  *ngIf="bookingMessage"
+  class="alert alert-success alert-dismissible fade show mt-2"
+  role="alert"
+>
+  {{ bookingMessage }}
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="onAlertClose()"
+  ></button>
+</div>
+
+<div
+  *ngIf="errorMessage"
+  class="alert alert-danger alert-dismissible fade show mt-2"
+  role="alert"
+>
+  {{ errorMessage }}
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="(errorMessage == undefined)"
+  ></button>
+</div>
+<form
+  #basketForm="ngForm"
+  (ngSubmit)="submitBasket(basketForm)"
+  class="container mt-4"
+>
+  <div class="mb-3">
+    <label for="source" class="form-label">Name</label>
+    <input
+      type="text"
+      id="driverName"
+      name="driverName"
+      class="form-control"
+      [(ngModel)]="basket.driverName"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="source" class="form-label">Phone Number</label>
+    <input
+      type="text"
+      id="driverPhone"
+      name="driverPhone"
+      class="form-control"
+      [(ngModel)]="basket.driverPhone"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="source" class="form-label">Source</label>
+    <input
+      type="text"
+      id="source"
+      name="source"
+      class="form-control"
+      [(ngModel)]="basket.src"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="destination" class="form-label">Destination</label>
+    <input
+      type="text"
+      id="destination"
+      name="destination"
+      class="form-control"
+      [(ngModel)]="basket.dest"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="date" class="form-label">Date</label>
+    <input
+      type="date"
+      id="date"
+      name="date"
+      class="form-control"
+      [(ngModel)]="basket.date"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="purpose" class="form-label">Purpose</label>
+    <input
+      type="text"
+      id="purpose"
+      name="purpose"
+      class="form-control"
+      [(ngModel)]="basket.purpose"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary m-2">Submit</button>
+  <button type="submit" class="btn btn-primary" routerLink="/vehicle">
+    Go-back
+  </button>
+</form>

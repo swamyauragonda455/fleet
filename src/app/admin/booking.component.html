@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <div *ngFor="let b of getBooking()" class="card mb-3">
+    <h5 class="card-title m-1">Driver: {{ b.driverName }}</h5>
+    <div *ngFor="let v of b.order_vehicle">
+      <p class="m-1">vehicle No: {{ v.vehicleNo }}</p>
+    </div>
+    <button class="btn btn-success me-2 m-1 p-1" (click)="confirmBooking(b)">
+      Confirm Booking
+    </button>
+
+    <button
+      class="btn btn-danger m-1 p-1"
+      (click)="delete(b.Id)"
+      [disabled]="status"
+    >
+      Cancel Booking
+    </button>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <!-- Top Bar -->
+  <div class="row align-items-center bg-dark text-white py-2">
+    <div class="col text-center">
+      <h5>Hello,{{ user.name }}</h5>
+    </div>
+    <div class="col text-end">
+      <!-- Optional: Add a profile icon or logout here -->
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="row mt-3">
+    <!-- Buttons Side-by-Side -->
+    <div class="col-3">
+      <div class="d-flex justify-content-between">
+        <button
+          routerLink="/profile/showbooking"
+          class="btn btn-outline-info me-2"
+        >
+          Bookings
+        </button>
+        <button routerLink="/profile" class="btn btn-outline-info me-2">
+          Settings
+        </button>
+        <button
+          routerLink="/profile/edituser"
+          class="btn btn-outline-info me-2"
+        >
+          Edit Details
+        </button>
+        <button routerLink="/" class="btn btn-outline-info">Logout</button>
+      </div>
+    </div>
+
+    <!-- Router Outlet -->
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>

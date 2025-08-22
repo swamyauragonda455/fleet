@@ -1,35 +1,104 @@
-<!-- <div>placeholder for the signin</div> -->
-
 <div class="container mt-5 d-flex justify-content-center">
-  <div class="card shadow" style="width: 400px">
-    <div class="card-header text-center bg-primary text-white">
-      <h4>Sign In</h4>
+  <div
+    class="card shadow-lg border-0"
+    style="width: 400px; border-radius: 18px"
+  >
+    <div
+      class="card-header text-center text-white"
+      style="
+        background: linear-gradient(90deg, #0d6efd 60%, #5bc0de 100%);
+        border-radius: 18px 18px 0 0;
+      "
+    >
+      <h4 class="mb-0 fw-bold letter-spacing-1">Sign In</h4>
     </div>
-    <div class="card-body">
-      <form #fg="ngForm" (ngSubmit)="checkUser(fg)">
+    <div
+      *ngIf="errorMessage"
+      class="alert alert-danger alert-dismissible fade show mt-3 mx-3"
+      role="alert"
+      style="border-radius: 8px"
+    >
+      {{ errorMessage }}
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="errorMessage = undefined"
+      ></button>
+    </div>
+    <div class="card-body p-4">
+      <form #fg="ngForm" (ngSubmit)="checkUser(fg)" novalidate>
         <div class="form-group mb-3">
-          <label for="email">Email</label>
+          <label for="email" class="form-label fw-semibold">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            class="form-control"
+            class="form-control rounded-pill px-3"
             [(ngModel)]="users.email"
+            #email="ngModel"
             required
+            email
+            [ngClass]="{
+              'is-invalid': email.invalid && email.touched,
+              'is-valid': email.valid && email.touched
+            }"
           />
+          <div
+            *ngIf="email.invalid && email.touched"
+            class="invalid-feedback ps-2"
+          >
+            Please enter a valid email.
+          </div>
         </div>
-        <div class="form-group mb-3">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            [(ngModel)]="users.password"
-            required
-          />
+        <div class="form-group mb-3 position-relative">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              name="password"
+              class="form-control rounded-pill px-3"
+              [(ngModel)]="users.password"
+              #password="ngModel"
+              required
+              minlength="6"
+              [ngClass]="{
+                'is-invalid': password.invalid && password.touched,
+                'is-valid': password.valid && password.touched
+              }"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-sm position-absolute end-0 top-50 translate-middle-y me-2"
+              style="border: none; background: transparent"
+              (click)="showPassword = !showPassword"
+              tabindex="-1"
+            >
+              <span
+                [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"
+              ></span>
+            </button>
+          </div>
+          <div
+            *ngIf="password.invalid && password.touched"
+            class="invalid-feedback ps-2"
+          >
+            Password is required (min 6 characters)
+          </div>
         </div>
-        <button type="submit" class="btn btn-success w-100">Sign In</button>
+        <button
+          type="submit"
+          class="btn btn-gradient w-100 py-2 fw-bold rounded-pill"
+          [disabled]="fg.invalid"
+          style="
+            background: linear-gradient(90deg, #0d6efd 60%, #5bc0de 100%);
+            color: #fff;
+            letter-spacing: 1px;
+          "
+        >
+          Sign In
+        </button>
       </form>
     </div>
   </div>

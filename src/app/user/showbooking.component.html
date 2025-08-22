@@ -1,0 +1,23 @@
+<div style="text-align: center">Booking details</div>
+<div claa="row">
+  <div class="col-12">
+    <table class="booking-table">
+      <thead>
+        <tr>
+          <th>Vehicle No</th>
+          <th>Category</th>
+          <th>Date</th>
+          <td>Booking status</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of getBooking()">
+          <td *ngFor="let v of p.order_vehicle">{{ v.vehicleNo }}</td>
+          <td *ngFor="let v of p.order_vehicle">{{ v.category }}</td>
+          <td>{{ p.date | date : "mediumDate" }}</td>
+          <td>{{ p.BookingStatus ? "confirmed" : "pending" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

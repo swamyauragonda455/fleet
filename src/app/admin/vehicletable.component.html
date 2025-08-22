@@ -1,0 +1,36 @@
+<table class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>VehicleNo</th>
+      <th>Status</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of getVehicles()">
+      <!-- console.log({{p.id}}); -->
+      <td>{{ p.id }}</td>
+      <td>{{ p.vehicleNo }}</td>
+      <td>{{ p.status }}</td>
+      <td>{{ p.category }}</td>
+
+      <td>
+        <button
+          class="btn btn-sm btn-warning"
+          [routerLink]="['/admin/main/vehicle/edit', p.vehicleNo]"
+        >
+          Edit
+        </button>
+
+        <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id)">
+          Delete
+        </button>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary" routerLink="/admin/main/vehicle/create">
+  Create New Product
+</button>

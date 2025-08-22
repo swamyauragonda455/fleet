@@ -1,50 +1,26 @@
 <!-- Navbar -->
 <div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 rounded">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 rounded m-2">
     <div class="container-fluid">
-      <a class="navbar-brand">Welcome</a>
-
-      <!-- Toggler for mobile -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarContent"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Navbar content -->
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <!-- Left nav links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <button class="nav-link active" routerLink="/vehicle">Home</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" routerLink="/admin">Fleet Manager</button>
-          </li>
-
-          <li class="nav-item">
-            <button class="nav-link" routerLink="/signin">sign In</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" routerLink="/signup">sign up</button>
-          </li>
-        </ul>
-
-        <!-- Search and Filter -->
-        <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search vehicles..."
-            aria-label="Search"
-          />
-
-          <button class="btn btn-outline-light" type="submit">Go</button>
+      <div class="row w-100 align-items-center">
+        <!-- Centered Search Bar -->
+        <div class="col-12 col-md-8 d-flex justify-content-center mb-2 mb-md-0">
+          <form class="d-flex w-75" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search vehicles..."
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light" type="submit">Go</button>
+          </form>
+        </div>
+        <!-- Filter Dropdown on Right -->
+        <div
+          class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center"
+        >
           <select
-            class="form-select"
+            class="form-select w-auto"
             [(ngModel)]="selectedCategory"
             name="category"
             (change)="changeCategory(selectedCategory)"
@@ -55,64 +31,132 @@
             <option value="diesel">Diesel</option>
             <option value="cng">CNG</option>
           </select>
-        </form>
-      </div>
-    </div>
-  </nav>
-  <div class="row g-4">
-    <div class="col-md-4" *ngFor="let item of vehicles">
-      <div class="card h-100 shadow-sm">
-        <!-- Optional Image -->
-        <!-- <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Vehicle Image" /> -->
-
-        <div class="card-body">
-          <h5 class="card-title">
-            vehicle #{{ item.vehicleNo }}
-            <span class="badge bg-dark float-end">
-              ${{ item.pricePerKm }}
-            </span>
-          </h5>
-          <p class="card-text">model:{{ item.model }}</p>
-          <p class="card-text">type:{{ item.category }}</p>
-          <p class="card-text">{{ item.seater }} seater</p>
-          <p class="bg-success text-white p-2 m-5">status:{{ item.status }}</p>
-        </div>
-
-        <div class="card-footer bg-transparent border-top-0">
-          <button
-            class="btn btn-primary btn-sm me-2"
-            (click)="addToBasket(item)"
-          >
-            book
+          <button class="btn btn-outline-light" routerLink="/profile">
+            profile
           </button>
         </div>
       </div>
     </div>
+  </nav>
+  <div class="row g-3">
+    <div class="col-12" *ngFor="let item of vehicles">
+      <div
+        class="card h-100 shadow-sm mb-2"
+        style="max-width: 650px; margin: 0 auto; border-radius: 12px"
+      >
+        <div class="row g-0 align-items-center">
+          <!-- Optional Image Section -->
+          <!--
+        <div class="col-md-3">
+          <img src="https://via.placeholder.com/150x100" class="img-fluid rounded-start" alt="Vehicle Image" />
+        </div>
+        -->
+          <div class="col p-2">
+            <div class="card-body py-2 px-3">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="card-title mb-0 fs-6">
+                  Vehicle #{{ item.vehicleNo }}
+                </h5>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <p class="mb-1 small">
+                    <strong>Model:</strong> {{ item.model }}
+                  </p>
+                  <p class="mb-1 small">
+                    <strong>Type:</strong> {{ item.category | titlecase }}
+                  </p>
+                  <p class="mb-1 small">
+                    <strong>Seater:</strong> {{ item.seater }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p class="mb-1 small">
+                    <strong>Status:</strong>
+                    <span
+                      [ngClass]="{
+                        'bg-success text-white px-2 rounded':
+                          item.status === 'Available',
+                        'bg-warning text-dark px-2 rounded':
+                          item.status === 'Maintenance',
+                        'bg-danger text-white px-2 rounded':
+                          item.status === 'Booked'
+                      }"
+                    >
+                      {{ item.status }}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div class="text-end">
+                <button
+                  class="btn btn-primary btn-sm"
+                  (click)="addToBasket(item)"
+                  routerLink="/basket"
+                  [disabled]="item.status !== 'Available'"
+                >
+                  Book
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="col-9 p-2">
-    <div class="form-inline float-left mr-1">
+  <div
+    class="d-flex justify-content-center align-items-center mt-4 gap-3 flex-wrap"
+  >
+    <!-- Pagination Centered -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-sm mb-0">
+        <li
+          *ngFor="let page of PageNumber"
+          class="page-item"
+          [class.active]="page == selectedPage"
+        >
+          <button
+            class="page-link"
+            (click)="changePage(page)"
+            [ngClass]="{
+              'bg-primary text-white': page == selectedPage,
+              'bg-light text-primary': page != selectedPage
+            }"
+            style="
+              border-radius: 6px;
+              margin: 0 1px;
+              padding: 2px 10px;
+              font-size: 0.9rem;
+              transition: background 0.2s;
+            "
+          >
+            {{ page }}
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <!-- Vehicles Per Page Selector Slim and Right -->
+    <div class="d-flex align-items-center ms-3" style="min-width: 160px">
+      <label
+        for="vehiclesPerPage"
+        class="form-label mb-0 me-2"
+        style="font-size: 0.95rem; color: #555"
+        >Per page:</label
+      >
       <select
-        class="form-control"
+        id="vehiclesPerPage"
+        class="form-select form-select-sm"
+        style="width: 80px; font-size: 0.95rem; padding: 2px 8px"
         [value]="vehiclesPerPage"
         (change)="changePageSize($event.target)"
       >
-        <!-- $event is referred as the last fired event  -->
-        <option value="3">3 per page</option>
-        <option value="4">4 per page</option>
-        <option value="6">6 per page</option>
-        <option value="8">8 per page</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
       </select>
-    </div>
-    <div class="btn-group float-right">
-      <button
-        *ngFor="let page of PageNumber"
-        class="btn btn-outline-primary"
-        (click)="changePage(page)"
-        [class.active]="page == selectedPage"
-      >
-        {{ page }}
-      </button>
     </div>
   </div>
 </div>

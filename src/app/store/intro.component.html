@@ -1,4 +1,42 @@
 <div><h1>fleet ops 360</h1></div>
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 rounded">
+    <div class="container-fluid">
+      <a class="navbar-brand">Welcome</a>
+
+      <!-- Toggler for mobile -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Left nav links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <button class="nav-link active" routerLink="/vehicle">Home</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/admin">Fleet Manager</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/signin">sign In</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/signup">sign up</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
 <div>
-  <button routerLink="/vehicle">lets get started</button>
+  <button routerLink="/signup">lets get started</button>
 </div>

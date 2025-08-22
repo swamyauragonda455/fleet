@@ -33,4 +33,20 @@ export class VehicleRepository {
       (c) => c.email == users.email && c.password == users.password
     );
   }
+  deleteVehicle(id?: number) {
+    return this.source.deleteVehicle(id).subscribe((v) => {
+      const index = this.vehicle.findIndex((p) => p.id == id);
+      if (index > -1) {
+        this.vehicle.splice(index, 1);
+        this.vehicle = [...this.vehicle];
+      }
+    });
+  }
+  saveVehicle(newvehicle: Vehicle) {
+    return this.source.saveVehicle(newvehicle).subscribe({
+      next: () => {
+        return 'successfully added';
+      },
+    });
+  }
 }

@@ -1,0 +1,91 @@
+<div
+  class="bg-primary p-2 text-white"
+  [class.bg-warning]="editing"
+  [class.text-dark]="editing"
+>
+  <h5>{{ editing ? "Edit" : "Create" }} Vehicle</h5>
+</div>
+<form novalidate #form="ngForm" (ngSubmit)="save(form)">
+  <div class="form-group">
+    <label for="status">vehicle Id</label>
+    <input
+      type="text"
+      class="form-control"
+      id="vehicle id"
+      name="vehicle id"
+      [(ngModel)]="vehicle.id"
+    />
+  </div>
+  <div class="form-group">
+    <label for="status">vehicle no</label>
+    <input
+      type="text"
+      class="form-control"
+      id="vehicle no"
+      name="vehicle no"
+      [(ngModel)]="vehicle.vehicleNo"
+    />
+  </div>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <input
+      type="text"
+      class="form-control"
+      id="status"
+      name="status"
+      [(ngModel)]="vehicle.status"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="model">Model</label>
+    <input
+      type="text"
+      class="form-control"
+      id="model"
+      name="model"
+      [(ngModel)]="vehicle.model"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="seater">Seater</label>
+    <input
+      type="number"
+      class="form-control"
+      id="seater"
+      name="seater"
+      [(ngModel)]="vehicle.seater"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <textarea
+      class="form-control"
+      id="category"
+      name="category"
+      [(ngModel)]="vehicle.category"
+    ></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [class.btn-warning]="editing">
+    {{ editing ? "Save" : "Create" }}
+  </button>
+  <button
+    type="reset"
+    class="btn btn-secondary"
+    routerLink="/admin/main/vehicles"
+  >
+    Cancel
+  </button>
+</form>
+
+<!-- vehicleNo?: number;
+  status?: string;
+  model?: string;
+  pricePerKm?: number;
+  seater?: number;
+  category?: string;
+  driverName?: string;
+  driverNumber?: number;  -->

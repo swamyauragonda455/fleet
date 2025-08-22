@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './signup.component';
 import { SignInComponent } from './signin.component';
+import { BasketComponent } from './basket.component';
 
 @NgModule({
   imports: [BrowserModule, ModelModule, RouterModule, FormsModule],
@@ -15,12 +16,14 @@ import { SignInComponent } from './signin.component';
     VehiclesComponent,
     SignUpComponent,
     SignInComponent,
+    BasketComponent,
   ],
   declarations: [
     VehiclesComponent,
     IntroComponent,
     SignUpComponent,
     SignInComponent,
+    BasketComponent,
   ],
 })
 export class StoreModule {}

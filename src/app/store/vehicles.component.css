@@ -1,0 +1,11 @@
+/* Add this style block at the bottom of your vehicles.component.html or in the component's CSS file */
+.page-item .page-link:hover {
+  background: #0d6efd !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.15);
+  transition: background 0.2s, color 0.2s;
+}
+.page-item.active .page-link {
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.25);
+}

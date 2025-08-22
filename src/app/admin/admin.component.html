@@ -1,1 +1,32 @@
-<div>place holder for the admin component</div>
+<!-- <div>place holder for the admin component</div> -->
+
+<div class="container-fluid">
+  <div class="row p-1 m-1">
+    <div class="col bg-dark text-white">
+      <a class="navbar-brand">hello ,Manager</a>
+    </div>
+  </div>
+  <div class="row m-2 p-1">
+    <div class="col-3">
+      <button
+        routerLink="/admin/main/vehicles"
+        class="btn btn-outline-info btn-block"
+      >
+        vehicles
+      </button>
+      <button
+        routerLink="/admin/main/booking"
+        class="btn btn-outline-info btn-block"
+      >
+        Bookings
+      </button>
+      <button routerLink="/" class="btn btn-outline-info btn-block">
+        logout
+      </button>
+    </div>
+
+    <div class="col-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

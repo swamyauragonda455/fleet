@@ -1,10 +1,10 @@
 export class Vehicle {
-  vehicleNo?: number;
-  status?: string;
-  model?: string;
-  pricePerKm?: number;
-  seater?: number;
-  category?: string;
-  driverName?: string;
-  driverNumber?: number;
+  constructor(
+    public id?: number,
+    public vehicleNo?: number,
+    public status?: string,
+    public model?: string,
+    public seater?: number,
+    public category?: string
+  ) {}
 }
